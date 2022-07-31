@@ -14,14 +14,16 @@ import TaskListItem from './TaskListItem';
 // import { useTaskContext } from '../contexts/TaskContext';
 
 // icons
-import { AssignmentInd, Description, Title } from '@mui/icons-material';
+import { AssignmentInd, DeleteOutline, Description, Title } from '@mui/icons-material';
 
 // Queries
-import { ALL_TASK } from '../lib/api';
-import { useQuery } from '@apollo/client';
+import { ALL_TASK, DELETE_TASK } from '../lib/api';
+import { useMutation, useQuery } from '@apollo/client';
+import { IconButton } from '@mui/material';
 
 export default function TaskList() {
     const { data, loading, error } = useQuery(ALL_TASK);
+    const [deleteTask] = useMutation(DELETE_TASK)
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
     // console.log(data.tasks.map(({title, description, assignedTo}) => console.log(title, description, assignedTo)));
@@ -33,16 +35,25 @@ export default function TaskList() {
                 {
                     data.tasks && data.tasks.map(
                         ({id, title, __typename, description, assignedTo}, i)=>(
-                        <TaskListItem
-                            key={i}
-                            id={id}
-                            TaskType={__typename}
-                            TaskFieldData={[
-                                {icon: <Title/>, attrib: title},
-                                {icon: <Description/>, attrib: description},
-                                {icon: <AssignmentInd/>, attrib: assignedTo},
-                            ]}
-                        />
+                            <div key={i}>
+                                <h1>{__typename}</h1>
+                                <h2>{title}</h2>
+                                <p>{description}</p>
+                                <i>{assignedTo}</i>
+                            {/* <TaskListItem
+                                // key={i}
+                                id={id}
+                                TaskType={__typename}
+                                TaskFieldData={[
+                                    {icon: <Title/>, attrib: title},
+                                    {icon: <Description/>, attrib: description},
+                                    {icon: <AssignmentInd/>, attrib: assignedTo},
+                                ]}
+                            /> */}
+                            <IconButton onClick={() => deleteTask({variables: {id}})} edge="end" aria-label="delete" sx={{ padding: 2}}>
+                                <DeleteOutline color="secondary"/>
+                            </IconButton>
+                            </div>
                     ))
                 }
             </List>

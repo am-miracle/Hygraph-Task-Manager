@@ -19,19 +19,34 @@ import {
 
 // nav
 import { useTaskContext } from '../contexts/TaskContext';
-import { useMutation } from '@apollo/client';
-import { DELETE_TASK } from '../lib/api';
-// import { Task } from '../lib/api';
+import { useMutation, useQuery } from '@apollo/client';
+import { DELETE_TASK, Task } from '../lib/api';
 
 export default function TaskListItem({ TaskType, id, TaskFieldData}) {
     const [open, setOpen] = useState(true);
     const { changeNavValue, getTaskId } = useTaskContext();
-    const [deleteTask] = useMutation(DELETE_TASK)
-
 
     // const { data, loading, error } = useQuery(Task, {
-    //     variables: {id}
+    //     variables: {id: id}
     // });
+    const [deleteTask] = useMutation(DELETE_TASK)
+
+    // const handleRemoveItem = id => {
+    //     deleteTask({
+    //         variables: { id },
+    //         update(cache) {
+    //             cache.modify({
+    //                 fields: {
+    //                     tasks(existingTaskRefs, { readField }) {
+    //                         return existingTaskRefs.filter(
+    //                             taskRef => id !== readField('id', taskRef)
+    //                         )
+    //                     }
+    //                 }
+    //             })
+    //         }
+    //     })
+    // }
 
     const handleClick = () => {
         setOpen(!open);
@@ -50,7 +65,7 @@ export default function TaskListItem({ TaskType, id, TaskFieldData}) {
                     <IconButton onClick={handleEditButton} edge="end" aria-label="edit">
                         <Edit sx={{ color: 'green' }}/>
                     </IconButton>
-                    <IconButton onClick={()=> console.log(deleteTask())} edge="end" aria-label="delete" sx={{ padding: 2}}>
+                    <IconButton onClick={()=> deleteTask({variables: {id: id}})} edge="end" aria-label="delete" sx={{ padding: 2}}>
                         <DeleteOutline color="secondary"/>
                     </IconButton>
                 </>

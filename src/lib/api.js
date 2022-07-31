@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const Task = gql`
-    query task {
-        task(where: {id: $id}) {
+    query task($id: ID!) {
+        tasks(where: {id: $id}) {
             id
             title
             description
@@ -23,7 +23,7 @@ export const ALL_TASK = gql`
 `
 
 export const DELETE_TASK = gql`
-    mutation deleteTask {
+    mutation deleteTask($id: ID!) {
         deleteTask(where: {id: $id}) {
             id
             title
