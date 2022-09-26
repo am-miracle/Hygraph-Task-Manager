@@ -32,3 +32,16 @@ export const DELETE_TASK = gql`
         }
     }
 `
+
+export const CREATE_TASK =  gql`
+    mutation createTask($) {
+        createTask(
+            data: {assignedTo: $assignedTo1, description: $description1, title: $title1}
+          ) {
+            id
+            title
+            description
+            assignedTo
+        }
+    }
+`
