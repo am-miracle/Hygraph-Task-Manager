@@ -1,35 +1,26 @@
-import * as React from 'react';
-    
-// core components
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import { AddTask, Task } from '@mui/icons-material';
+import { BottomNavigation, BottomNavigationAction } from '@mui/material';
+import React, { useState } from 'react'
+// import { Link } from 'react-router-dom';
 
-// icons
-import {
-    AddTask,
-    Task,
-} from '@mui/icons-material';
-
-// contexts
-import { useTaskContext } from '../contexts/TaskContext';
-
-export default function BottomNav() {
-    const { nav_value, changeNavValue } = useTaskContext();
-    const handleChange = (event, newValue) => {
-        changeNavValue(newValue);
-    };
-    return (
-        <BottomNavigation showLabels value={nav_value} onChange={handleChange}>
-            <BottomNavigationAction
-                label="Tasks"
-                value="TaskList"
-                icon={<Task />}
-            />
-            <BottomNavigationAction
-                label="Add Task"
-                value="AddTask"
-                icon={<AddTask />}
-            />
+const BottomNav = () => {
+  const [value, setValue] = useState('task');
+  
+  return (
+    <div>
+        <BottomNavigation
+            showLabels
+            sx={{bgcolor: '#292f38'}}
+            value={value}
+            onChange={(event, newValue) => {
+              setValue(newValue);
+            }}
+        >
+          <BottomNavigationAction href='/' sx={{color: '#ccc'}} label="Tasks" icon={<Task />} />
+          <BottomNavigationAction href='/new ' sx={{color: '#ccc'}} label="AddTask" icon={<AddTask />} />
         </BottomNavigation>
-    );
-};
+  </div>
+  )
+}
+
+export default BottomNav

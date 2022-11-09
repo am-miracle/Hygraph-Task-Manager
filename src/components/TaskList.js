@@ -1,65 +1,75 @@
-import * as React from 'react';
-    
-// mui components
-import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import List from '@mui/material/List';
-import Paper from '@mui/material/Paper';
+import { useQuery } from '@apollo/client';
+import React from 'react'
+import { ALL_TASK } from '../lib/api';
+import Task from './Task';
+import { Typography } from '@mui/material';
 
-// custom components
-import BottomNav from './BottomNav';
-import TaskListItem from './TaskListItem';
 
-// data
-// import { useTaskContext } from '../contexts/TaskContext';
 
-// icons
-import { AssignmentInd, DeleteOutline, Description, Title } from '@mui/icons-material';
+const TaskList = () => {
+  const { loading, error, data } = useQuery(ALL_TASK)
 
-// Queries
-import { ALL_TASK, DELETE_TASK } from '../lib/api';
-import { useMutation, useQuery } from '@apollo/client';
-import { IconButton } from '@mui/material';
 
-export default function TaskList() {
-    const { data, loading, error } = useQuery(ALL_TASK);
-    const [deleteTask] = useMutation(DELETE_TASK)
-    if (loading) return 'Loading...';
-    if (error) return `Error! ${error.message}`;
-    // console.log(data.tasks.map(({title, description, assignedTo}) => console.log(title, description, assignedTo)));
-    return (
-        <Box sx={{ pb: 7 }}>
-            <CssBaseline />
-            <h1>Tasks</h1>
-            <List>
-                {
-                    data.tasks && data.tasks.map(
-                        ({id, title, __typename, description, assignedTo}, i)=>(
-                            <div key={i}>
-                                <h1>{__typename}</h1>
-                                <h2>{title}</h2>
-                                <p>{description}</p>
-                                <i>{assignedTo}</i>
-                            {/* <TaskListItem
-                                // key={i}
-                                id={id}
-                                TaskType={__typename}
-                                TaskFieldData={[
-                                    {icon: <Title/>, attrib: title},
-                                    {icon: <Description/>, attrib: description},
-                                    {icon: <AssignmentInd/>, attrib: assignedTo},
-                                ]}
-                            /> */}
-                            <IconButton onClick={() => deleteTask({variables: {id}})} edge="end" aria-label="delete" sx={{ padding: 2}}>
-                                <DeleteOutline color="secondary"/>
-                            </IconButton>
-                            </div>
-                    ))
-                }
-            </List>
-            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-                <BottomNav/>
-            </Paper>
-        </Box>
-    );
-};
+  if (loading) return <p>Getting tasks...</p>;
+  if (error) return <p>An error occurred</p>;
+
+
+  return (
+    <div>
+        {/* <p>Total Tasks: {data.tasks.length}</p> */}
+        <Typography sx={{color: '#ccc'}} variant="p" gutterBottom>
+            Total Tasks: {data.tasks.length}
+        </Typography>
+        {data.tasks.length ?
+            (
+                <ul className='list'>
+                    {data.tasks.map((task) => (
+                        <Task task={task} key={task.id} />
+                    ))}
+                </ul>
+            )
+            :
+            (
+                <div className='no-tasks'>No Tasks</div>
+            )
+        }
+    </div>
+  )
+}
+
+export default TaskList;
+
+// import { useMutation } from '@apollo/client'
+// import React from 'react'
+// import { DELETE_TASK, UPDATE_TASk } from '../lib/api';
+
+
+// const TaskList = ({ tasks, getTask }) => {
+//     const [deleteTask] = useMutation(DELETE_TASK, {
+//         refetchQueries: [
+//             { query: getTask },
+//         ]
+//     })
+//     const [updateTask] = useMutation(UPDATE_TASk, {
+//         refetchQueries: [
+//             { query: getTask },
+//         ]
+//     });
+//   return (
+//     <div>
+//         {tasks && tasks.tasks.map(({id, title, description, assignedTo}) => (
+//             <div key={id}>
+//                 <li>
+//                     <h1>{title}</h1>
+//                     <h3>{description}</h3>
+//                     <p>{assignedTo}</p>
+//                 </li>
+//                 <button onClick={() => {updateTask({variables: { id: id}})}}>edit</button>
+//                 <button onClick={() => {deleteTask({ variables: { id: id }})}}>delete</button>
+//             </div>
+//         ))}
+//     </div>
+//   )
+// }
+
+// export default TaskList
