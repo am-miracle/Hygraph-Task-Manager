@@ -1,15 +1,5 @@
 import { gql } from '@apollo/client';
 
-export const FIND_TASK = gql`
-    query singleTask($id: ID) {
-        task(where: {id: $id}) {
-            id
-            title
-            description
-            assignedTo
-        }
-    }
-`
 export const ALL_TASK = gql`
     query {
         tasks(stage: DRAFT) {
@@ -43,24 +33,23 @@ export const CREATE_TASK =  gql`
     }
 `
 export const UPDATE_TASk = gql`
-mutation updateTaSk($assignedTo: String, $description: String, $title: String, $id: ID){
-    updateTask(
-        data: {assignedTo: $assignedTo, description: $description, title: $title}
-        where: {id: $id}
-      ) {
-        assignedTo
-        description
-        title
-      }
+    mutation updateTask($assignedTo: String, $description: String, $title: String, $id: ID){
+        updateTask(
+            where: {id: $id}
+            data: {assignedTo: $assignedTo, description: $description, title: $title}
+        ) {
+            assignedTo
+            description
+            title
+        }
 }
 `
 export const PUBLISH_TASK = gql`
- mutation publishTask($id : ID) {
-    publishTask(where: {id: $id, to: PUBLISHED}) {
-        assignedTo
-        description
-        id
-        title
+    mutation publishTask($id: ID) {
+        publishTask(where: {id: $id}, to: PUBLISHED) {
+            assignedTo
+            description
+            title
+        }
     }
- }
 `

@@ -1,21 +1,21 @@
 import { useMutation } from '@apollo/client'
 import React, { useState } from 'react'
-import { CREATE_TASK } from '../lib/api';
+import { UPDATE_TASk } from '../lib/api';
 import {OutlinedInput, FormControl, InputLabel, Button, Box} from '@mui/material'
 import { Link } from 'react-router-dom';
 
 const UpdateTask = () => {
-  const [task, setTask] = useState({});
-  const [createTask, { isadding }] = useMutation(CREATE_TASK)
+    const [taskToUpdate, setTaskToUpdate] = useState('');
+    const [replacementTask, setReplacementTask] = useState({
+      title: '', description: '', assignedTo: ''
+    });
+    const [updateTask] = useMutation(UPDATE_TASk);
 
-  if (isadding) return 'Submitting...';
 
-  const handleOnChange = (event)=> {
-    setTask({ ...task, [event.target.name]: event.target.value});
+  const handleUpdate = () => {
+    updateTask({ variables: { taskToUpdate, replacementTask }});
   }
-  const onClick = () => {
-    createTask({variables: { ...task }});
-  }
+  console.log(taskToUpdate.id)
 
   return (
     <Box
@@ -23,15 +23,16 @@ const UpdateTask = () => {
       <FormControl fullWidth sx={{ my: 1 }}>
         <InputLabel>Title</InputLabel>
         <OutlinedInput
-          onChange={handleOnChange}
+          onChange={e => setReplacementTask({ ...replacementTask, title: e.currentTarget.value })}
           name='title'
           label="Title"
           sx={{bgColor: '#fff', color: '#fff'}}
         />
       </FormControl>
       <FormControl fullWidth sx={{ my: 1 }}>
+      <InputLabel>Description</InputLabel>
         <OutlinedInput
-          onChange={handleOnChange}
+          onChange={e => setReplacementTask({ ...replacementTask, description: e.currentTarget.value })}
           name='description'
           label="Description"
           sx={{bgColor: '#fff', color: '#fff'}}
@@ -40,14 +41,14 @@ const UpdateTask = () => {
       <FormControl fullWidth sx={{ my: 1 }}>
         <InputLabel>Assigned To</InputLabel>
         <OutlinedInput
-          onChange={handleOnChange}
+          onChange={e => setReplacementTask({ ...replacementTask, assignedTo: e.currentTarget.value })}
           name='assignedTo'
           label="Assigned To"
           sx={{bgColor: '#fff', color: '#fff'}}
         />
       </FormControl>
       <Link to='/'>
-       <Button onClick={onClick} type='submit' sx={{ my: 1, py: 2 }} fullWidth variant="contained">Update</Button>
+       <Button onClick={handleUpdate} type='submit' sx={{ my: 1, py: 2 }} fullWidth variant="contained">Update</Button>
        </Link>
     </Box>
   )

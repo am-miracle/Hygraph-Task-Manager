@@ -6,7 +6,9 @@ import { Link } from 'react-router-dom';
 
 const AddForm = () => {
   const [task, setTask] = useState({});
-  const [createTask, { isadding }] = useMutation(CREATE_TASK)
+  const [createTask, { isadding }] = useMutation(CREATE_TASK, {
+    refetchQueries: [{ query: CREATE_TASK}]
+  })
 
   if (isadding) return 'Submitting...';
 
@@ -49,7 +51,7 @@ const AddForm = () => {
       </FormControl>
       <Link to='/'>
        <Button onClick={onClick} type='submit' sx={{ my: 1, py: 2 }} fullWidth variant="contained">Submit</Button>
-       </Link>
+      </Link>
     </Box>
   )
 }

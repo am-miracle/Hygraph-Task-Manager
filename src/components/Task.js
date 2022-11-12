@@ -11,18 +11,18 @@ const Task = ({ task, getTask }) => {
             { query: getTask },
         ]
     })
-    const [updateTask] = useMutation(UPDATE_TASk, {
-        refetchQueries: [
-            { query: getTask },
-        ]
-    });
+    // const [updateTask] = useMutation(UPDATE_TASk, {
+    //     refetchQueries: [
+    //         { query: getTask },
+    //     ]
+    // });
 
     const handleDelete = ()=> {
         deleteTask({ variables: { id: task.id }});
     }
-    const handleUpdate = () => {
-        updateTask({ variables: { id: task.id }})
-    }
+    // const handleUpdate = () => {
+    //     updateTask({ variables: { id: task.id }})
+    // }
 
 
   return (
@@ -55,7 +55,7 @@ const Task = ({ task, getTask }) => {
             <Button href='/edit' className='btn-delete task-btn'>
                 <Update
                 sx={{bgcolor: '#292f38', color: '#ccc'}}
-                onClick={handleUpdate}
+                // onClick={handleUpdate}
                 />
             </Button>
         </Stack>

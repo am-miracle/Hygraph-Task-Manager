@@ -16,7 +16,6 @@ const TaskList = () => {
 
   return (
     <div>
-        {/* <p>Total Tasks: {data.tasks.length}</p> */}
         <Typography sx={{color: '#ccc'}} variant="p" gutterBottom>
             Total Tasks: {data.tasks.length}
         </Typography>
