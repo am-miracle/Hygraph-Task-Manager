@@ -4,7 +4,7 @@ import { CREATE_TASK } from '../lib/api';
 import {OutlinedInput, FormControl, InputLabel, Button, Box} from '@mui/material'
 import { Link } from 'react-router-dom';
 
-const AddForm = () => {
+const AddTask = () => {
   const [task, setTask] = useState({});
   const [createTask, { isadding }] = useMutation(CREATE_TASK, {
     refetchQueries: [{ query: CREATE_TASK}]
@@ -23,30 +23,30 @@ const AddForm = () => {
     <Box
     sx={{ maxWidth: '100%'}}>
       <FormControl fullWidth sx={{ my: 1 }}>
-        <InputLabel>Title</InputLabel>
+        <InputLabel sx={{color: '#cccc'}}>Title</InputLabel>
         <OutlinedInput
           onChange={handleOnChange}
           name='title'
           label="title"
-          sx={{bgColor: '#fff', color: '#fff'}}
+          sx={{border: '1px solid #cccc'}}
         />
       </FormControl>
       <FormControl fullWidth sx={{ my: 1 }}>
-        <InputLabel>Description</InputLabel>
+        <InputLabel sx={{color: '#cccc'}}>Description</InputLabel>
          <OutlinedInput
           onChange={handleOnChange}
           name='description'
           label="description"
-          sx={{bgColor: '#fff', color: '#fff'}}
+          sx={{border: '1px solid #cccc'}}
         />
       </FormControl>
       <FormControl fullWidth sx={{ my: 1 }}>
-        <InputLabel>Assigned To</InputLabel>
+        <InputLabel sx={{color: '#cccc'}}>Assigned To</InputLabel>
         <OutlinedInput
           onChange={handleOnChange}
           name='assignedTo'
           label="Assigned To"
-          sx={{bgColor: '#fff', color: '#fff'}}
+          sx={{border: '1px solid #cccc'}}
         />
       </FormControl>
       <Link to='/'>
@@ -56,4 +56,4 @@ const AddForm = () => {
   )
 }
 
-export default AddForm
+export default AddTask

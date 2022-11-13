@@ -2,10 +2,9 @@ import React from 'react';
 
 import { Route, Routes } from "react-router-dom";
 
-import AddForm from './components/AddForm';
+import AddTask from './components/AddTask';
 import TaskList from './components/TaskList';
 import BottomNav from './components/BottomNav';
-import UpdateTask from './components/updateTask';
 
 import './App.css'
 
@@ -19,8 +18,7 @@ function App() {
           <div className='main'>
             <Routes>
               <Route path="/" element={<TaskList />} />
-              <Route path="/new" element={<AddForm /> } />
-              <Route path='/edit' element={<UpdateTask />} />
+              <Route path="/new" element={<AddTask /> } />
             </Routes>
           </div>
           <BottomNav />

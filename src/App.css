@@ -78,18 +78,18 @@
 }
 
 .task-input {
-  width: 350px;
+  /* width: 350px;
   min-width: 250px;
   padding: 15px 10px 10px 20px;
   margin-right: 10px;
   font-family: 'Josefin Sans', serif;
   font-size: 15px;
-  color: #ccc;
-  background-color: #1d222b;
-  border: 1px solid #444;
-  outline: none;
+  color: #111;
+  background-color: #fff; */
+  border: 1px solid rgba(180, 180, 180, 0.8);
+  /* outline: none;
   border-radius: 20px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); */
 }
 
 .buttons {

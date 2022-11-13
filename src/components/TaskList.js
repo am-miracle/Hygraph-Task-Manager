@@ -37,38 +37,3 @@ const TaskList = () => {
 }
 
 export default TaskList;
-
-// import { useMutation } from '@apollo/client'
-// import React from 'react'
-// import { DELETE_TASK, UPDATE_TASk } from '../lib/api';
-
-
-// const TaskList = ({ tasks, getTask }) => {
-//     const [deleteTask] = useMutation(DELETE_TASK, {
-//         refetchQueries: [
-//             { query: getTask },
-//         ]
-//     })
-//     const [updateTask] = useMutation(UPDATE_TASk, {
-//         refetchQueries: [
-//             { query: getTask },
-//         ]
-//     });
-//   return (
-//     <div>
-//         {tasks && tasks.tasks.map(({id, title, description, assignedTo}) => (
-//             <div key={id}>
-//                 <li>
-//                     <h1>{title}</h1>
-//                     <h3>{description}</h3>
-//                     <p>{assignedTo}</p>
-//                 </li>
-//                 <button onClick={() => {updateTask({variables: { id: id}})}}>edit</button>
-//                 <button onClick={() => {deleteTask({ variables: { id: id }})}}>delete</button>
-//             </div>
-//         ))}
-//     </div>
-//   )
-// }
-
-// export default TaskList
