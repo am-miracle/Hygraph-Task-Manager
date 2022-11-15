@@ -5,10 +5,10 @@ import App from './App';
 import { BrowserRouter } from "react-router-dom"
 
 const client = new ApolloClient({
-  uri: process.env.REACT_APP_GCMS_API,
+  uri: process.env.REACT_APP_HYG_API,
   cache: new InMemoryCache(),
   headers: {
-      Authorization: `Bearer ${process.env.REACT_APP_GCMS_AUTH}`,
+      Authorization: `Bearer ${process.env.REACT_APP_HYG_AUTH}`,
     },
 });
 
