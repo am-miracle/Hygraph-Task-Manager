@@ -23,7 +23,7 @@ const TaskList = () => {
             (
                 <ul className='list'>
                     {data.tasks.map((task) => (
-                        <Task task={task} key={task.id} />
+                        <Task task={task} key={task.id} getTask={ALL_TASK} />
                     ))}
                 </ul>
             )

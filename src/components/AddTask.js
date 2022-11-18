@@ -6,9 +6,7 @@ import { Link } from 'react-router-dom';
 
 const AddTask = () => {
   const [task, setTask] = useState({});
-  const [createTask, { isadding }] = useMutation(CREATE_TASK, {
-    refetchQueries: [{ query: CREATE_TASK}]
-  })
+  const [createTask, { isadding }] = useMutation(CREATE_TASK)
 
   if (isadding) return 'Submitting...';
 
@@ -28,7 +26,7 @@ const AddTask = () => {
           onChange={handleOnChange}
           name='title'
           label="title"
-          sx={{border: '1px solid #cccc'}}
+          sx={{color: '#cccc'}}
         />
       </FormControl>
       <FormControl fullWidth sx={{ my: 1 }}>
@@ -37,7 +35,7 @@ const AddTask = () => {
           onChange={handleOnChange}
           name='description'
           label="description"
-          sx={{border: '1px solid #cccc'}}
+          sx={{color: '#cccc'}}
         />
       </FormControl>
       <FormControl fullWidth sx={{ my: 1 }}>
@@ -46,11 +44,11 @@ const AddTask = () => {
           onChange={handleOnChange}
           name='assignedTo'
           label="Assigned To"
-          sx={{border: '1px solid #cccc'}}
+          sx={{color: '#cccc'}}
         />
       </FormControl>
       <Link to='/'>
-       <Button onClick={onClick} type='submit' sx={{ my: 1, py: 2 }} fullWidth variant="contained">Submit</Button>
+       <Button onClick={onClick} type='submit' sx={{ my: 1, py: 2 }} fullWidth variant="contained">Add Task</Button>
       </Link>
     </Box>
   )

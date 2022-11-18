@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client'
 import React, { useState }  from 'react'
-import { DELETE_TASK, UPDATE_TASk } from '../lib/api'
+import { DELETE_TASK, UPDATE_TASk } from '../lib/api';
+import { Link } from 'react-router-dom';
 import {AssignmentInd, Delete, Description, Update} from '@mui/icons-material';
 import { List, ListItemButton, ListItemIcon, ListItemText, Typography, Stack, Button, Modal, Box, FormControl, OutlinedInput, InputLabel } from '@mui/material';
 
@@ -91,31 +92,33 @@ const Task = ({ task, getTask }) => {
         <FormControl fullWidth sx={{ my: 1 }}>
             <InputLabel sx={{color: '#cccc'}}>Title</InputLabel>
             <OutlinedInput
-            onChange={handleOnChange}
-            name='title'
-            label="Title"
-            sx={{border: '1px solid #cccc'}}
+                onChange={handleOnChange}
+                name='title'
+                label="Title"
+                sx={{color: '#cccc'}}
             />
         </FormControl>
         <FormControl fullWidth sx={{ my: 1 }}>
         <InputLabel sx={{color: '#cccc'}}>Description</InputLabel>
             <OutlinedInput
-            onChange={handleOnChange}
-            name='description'
-            label="Description"
-            sx={{border: '1px solid #cccc'}}
+                onChange={handleOnChange}
+                name='description'
+                label="Description"
+                sx={{color: '#cccc'}}
             />
         </FormControl>
         <FormControl fullWidth sx={{ my: 1 }}>
             <InputLabel sx={{color: '#cccc'}}>Assigned To</InputLabel>
             <OutlinedInput
-            onChange={handleOnChange}
-            name='assignedTo'
-            label="Assigned To"
-            sx={{border: '1px solid #cccc', color: '#ccc'}}
+                onChange={handleOnChange}
+                name='assignedTo'
+                label="Assigned To"
+                sx={{color: '#cccc'}}
             />
         </FormControl>
-        <Button href='/' onClick={handleUpdate} type='submit' sx={{ my: 1, py: 2 }} fullWidth variant="contained">Update</Button>
+        <Link to='/'>
+            <Button onClick={handleUpdate} type='submit' sx={{ my: 1, py: 2 }} fullWidth variant="contained">Update</Button>
+        </Link>
         </Box>
       </Modal>
     </li>
